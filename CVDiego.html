@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego Torres | Perfil Profesional Interactivo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Tipografía profesional y limpia */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Contenedor de gráficos estricto para evitar desbordes */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        /* Estilos personalizados para interacciones */
+        .skill-tag { transition: all 0.2s ease; }
+        .skill-tag:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        
+        .section-fade { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Utilidades de texto */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #2563eb, #0891b2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Chosen Palette: Navy Blue, Slate, White, and Cyan/Blue accents for a tech/management professional look -->
+    <!-- Application Structure Plan: 
+         1. Hero/Header: Immediate impact with contact info, current titles, and a strong Value Proposition.
+         2. Diferenciadores (Value Add): Quick cards highlighting the "Amazon standard" and dual background.
+         3. Dashboard de Competencias: Interactive radar chart to visually prove the versatile profile (Logistics vs IT vs Projects).
+         4. Experiencia: Clean timeline focusing on KPIs and leadership.
+         5. Educación & Herramientas: Progress bars and grid layouts for quick scanning by ATS/Recruiters.
+         This structure pushes the most unique selling points to the top, hooking the recruiter immediately. -->
+    <!-- Visualization & Content Choices: 
+         - Profile Matrix (Radar Chart via Chart.js): Shows the hybrid nature of the profile (Arch + IT + Logistics). Better than simple text.
+         - Skills Progress (HTML/CSS Bars): For languages and tools, providing a quick visual hierarchy of expertise.
+         - Interactive Tags: For soft/hard skills, making the layout dynamic and scannable.
+         - NO SVG/Mermaid used. Unicode icons utilized for performance and simplicity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navegación Sticky -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="font-bold text-xl tracking-tight text-slate-800">DT<span class="text-blue-600">.</span></div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#perfil" class="text-sm font-medium text-slate-600 hover:text-blue-600">Perfil</a>
+                <a href="#competencias" class="text-sm font-medium text-slate-600 hover:text-blue-600">Competencias</a>
+                <a href="#experiencia" class="text-sm font-medium text-slate-600 hover:text-blue-600">Experiencia</a>
+                <a href="#educacion" class="text-sm font-medium text-slate-600 hover:text-blue-600">Educación</a>
+            </div>
+            <a href="mailto:diego.toram25@gmail.com" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Contactar</a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- HEADER / HERO SECTION -->
+        <section id="perfil" class="section-fade pt-8 pb-12 border-b border-slate-200">
+            <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+                <div class="flex-1 space-y-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4 uppercase tracking-wider">
+                            &#9889; Disponibilidad Inmediata | Turno Nocturno | Híbrido
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                            Diego Alberto <br/> Torres Ramírez
+                        </h1>
+                        <h2 class="text-2xl font-semibold text-gradient mt-2">
+                            Coordinador Operativo | Gestor de Proyectos | Arquitecto
+                        </h2>
+                    </div>
+                    
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-3xl">
+                        Profesional de alto rendimiento forjado en el entorno logístico más exigente <strong>(Amazon)</strong>. Combino una base técnica en <strong>TI y Arquitectura</strong> con metodologías de <strong>Gestión de Proyectos</strong> para optimizar operaciones, liderar equipos bajo presión y asegurar el cumplimiento estricto de KPIs.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 text-sm font-medium text-slate-700">
+                        <span class="flex items-center gap-1">&#128205; Coacalco, Estado de México (Disp. CDMX/EDOMEX)</span>
+                        <span class="flex items-center gap-1">&#128222; 729 835 3024</span>
+                        <span class="flex items-center gap-1">&#9993; diego.toram25@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Proposition Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">&#128640;</div>
+                    <h3 class="font-bold text-slate-800 mb-2">El "Estándar Amazon"</h3>
+                    <p class="text-sm text-slate-600">Acostumbrado a métricas estrictas, velocidad operativa y liderazgo de equipos de alto volumen. Experiencia comprobada en turno nocturno.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">&#128279;</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Perfil Puente (TI & Ops)</h3>
+                    <p class="text-sm text-slate-600">Doble formación (Arquitectura + Técnico TI). Entiendo el lenguaje de los ingenieros y la realidad de los operadores en piso.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                    <div class="text-3xl mb-3">&#128200;</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Mejora Continua</h3>
+                    <p class="text-sm text-slate-600">En constante evolución con dos Maestrías en curso (Proyectos y Salud). Capacidad de resolución de incidencias críticas en tiempo real.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD DE COMPETENCIAS -->
+        <section id="competencias" class="section-fade scroll-mt-20">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">Análisis de Competencias</h2>
+                <p class="text-slate-600 mt-2">Descubre cómo mi perfil híbrido aporta valor en múltiples dimensiones operativas y técnicas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Gráfico de Radar -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-center font-semibold text-slate-700 mb-4">Matriz de Perfil Profesional</h3>
+                    <div class="chart-container">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Lista de Skills Interactiva -->
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">&#128230; Logística & Operaciones</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">WMS</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Control de Inventarios</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">KPIs Operativos</span>
+                            <span class="skill-tag bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Coordinación Logística</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">&#128187; Técnico & Diseño</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-sm font-medium cursor-default">Lectura de Planos</span>
+                            <span class="skill-tag bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-sm font-medium cursor-default">AutoCAD</span>
+                            <span class="skill-tag bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-sm font-medium cursor-default">Soporte Técnico Nivel 1</span>
+                            <span class="skill-tag bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-sm font-medium cursor-default">Excel Avanzado</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">&#129309; Gestión & Liderazgo (WBS)</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Liderazgo de Equipos</span>
+                            <span class="skill-tag bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Resolución bajo Presión</span>
+                            <span class="skill-tag bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Planificación de Recursos</span>
+                            <span class="skill-tag bg-teal-50 text-teal-700 border border-teal-200 px-3 py-1.5 rounded text-sm font-medium cursor-default">Atención al Cliente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCIA PROFESIONAL -->
+        <section id="experiencia" class="section-fade scroll-mt-20">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900">Trayectoria de Impacto</h2>
+                <p class="text-slate-600 mt-2">Logros clave en operaciones logísticas a gran escala.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 relative overflow-hidden">
+                <!-- Elemento decorativo -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400 opacity-10 rounded-bl-full"></div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-slate-100 pb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            Auxiliar de Almacén <span class="text-blue-600">- Líder de Turno</span>
+                        </h3>
+                        <p class="text-lg font-medium text-slate-600 mt-1">&#128230; Amazon Warehouse (Tepotzotlán, EDOMEX)</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 bg-slate-100 px-4 py-2 rounded-lg font-semibold text-slate-700">
+                        Dic 2022 – Oct 2025
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-500 font-bold text-xl">&#10003;</span>
+                            <span class="text-slate-700"><strong>Liderazgo Inbound (Turno Nocturno):</strong> Coordinación de equipos en uno de los centros de mayor volumen regional.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-500 font-bold text-xl">&#10003;</span>
+                            <span class="text-slate-700"><strong>Cumplimiento de KPIs:</strong> Supervisión de conteo, acomodo y verificación de inventario cumpliendo métricas de productividad sin excepción.</span>
+                        </li>
+                    </ul>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-500 font-bold text-xl">&#9881;</span>
+                            <span class="text-slate-700"><strong>Resolución en Tiempo Real:</strong> Manejo de incidencias críticas, discrepancias y saturación de áreas para reducir cuellos de botella.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-500 font-bold text-xl">&#9881;</span>
+                            <span class="text-slate-700"><strong>Optimización y Seguridad:</strong> Implementación de mejoras de flujo logístico (WMS) y supervisión de protocolos con <em>cero accidentes</em>.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCACIÓN E IDIOMAS -->
+        <section id="educacion" class="section-fade scroll-mt-20 pb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Educación -->
+                <div class="lg:col-span-2 space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Formación Académica</h2>
+                    
+                    <div class="relative pl-6 border-l-2 border-blue-200 space-y-8">
+                        
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-1 bg-blue-600 rounded-full w-4 h-4 ring-4 ring-white"></div>
+                            <h4 class="font-bold text-lg text-slate-800">Maestría en Gestión de Proyectos</h4>
+                            <p class="text-sm font-semibold text-blue-600 mb-1">Universidad ICEL Coacalco | Ene 2025 - En curso</p>
+                            <p class="text-sm text-slate-600">Desarrollo de habilidades avanzadas en metodologías, planeación y control de recursos.</p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-1 bg-blue-400 rounded-full w-4 h-4 ring-4 ring-white"></div>
+                            <h4 class="font-bold text-lg text-slate-800">Maestría en Adm. de Servicios de Salud</h4>
+                            <p class="text-sm font-semibold text-blue-600 mb-1">En curso</p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-1 bg-slate-400 rounded-full w-4 h-4 ring-4 ring-white"></div>
+                            <h4 class="font-bold text-lg text-slate-800">Licenciatura en Arquitectura</h4>
+                            <p class="text-sm font-semibold text-slate-600 mb-1">Universidad ICEL EDOMEX | Ene 2021 - En proceso</p>
+                            <p class="text-sm text-slate-600">Créditos concluidos. Pendiente de título. Base en diseño estructural, lectura de proyectos y espacialidad.</p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-1 bg-slate-300 rounded-full w-4 h-4 ring-4 ring-white"></div>
+                            <h4 class="font-bold text-lg text-slate-800">Técnico en Tecnologías de la Información (TI)</h4>
+                            <p class="text-sm font-semibold text-slate-600 mb-1">CECYTEM Coacalco | Ago 2016 - Jul 2019</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Idiomas y Software -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 mb-6">Idiomas</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-slate-700">Español</span>
+                                    <span class="text-sm font-medium text-slate-700">Nativo</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-slate-700">Inglés</span>
+                                    <span class="text-sm font-medium text-slate-700">Intermedio (B1)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-slate-700">Italiano</span>
+                                    <span class="text-sm font-medium text-slate-700">Básico (A2)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-blue-300 h-2 rounded-full" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-4">&#128187; Software & Datos</h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Excel Avanzado</li>
+                            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Word / PowerPoint</li>
+                            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span> AutoCAD</li>
+                            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Sistemas WMS</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-white py-8 text-center border-t-4 border-blue-600">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-4">¿Listo para potenciar sus operaciones?</h2>
+            <p class="text-slate-400 mb-6">Un profesional híbrido aporta soluciones integrales donde otros ven límites separados.</p>
+            <a href="mailto:diego.toram25@gmail.com" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-500 transition shadow-lg">
+                Contactar a Diego Torres
+            </a>
+            <p class="text-slate-500 text-sm mt-8">Coacalco, Estado de México • Disp. Turno Nocturno</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Lógica para renderizar gráfico de Radar de perfil profesional (Chart.js)
+            const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+            
+            // Datos diseñados para impresionar a un reclutador basado en el CV
+            const data = {
+                labels: [
+                    'Liderazgo (Turnos/Equipos)', 
+                    'Operaciones Logísticas', 
+                    'Gestión de Proyectos', 
+                    'Resolución bajo presión', 
+                    'Soporte/Base Técnica (TI/Arq)'
+                ],
+                datasets: [{
+                    label: 'Nivel de Especialidad',
+                    data: [90, 95, 80, 95, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)', // Tailwind Blue-600 con opacidad
+                    borderColor: 'rgba(37, 99, 235, 1)',
+                    pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(37, 99, 235, 1)',
+                    borderWidth: 2
+                }]
+            };
+
+            const config = {
+                type: 'radar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Fundamental para que el CSS .chart-container controle el tamaño
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            pointLabels: {
+                                font: { size: 12, family: "'Inter', sans-serif" },
+                                color: '#475569' // Tailwind Slate-600
+                            },
+                            ticks: {
+                                display: false, // Ocultar números para que sea visual
+                                min: 0,
+                                max: 100
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { family: "'Inter', sans-serif", size: 14 },
+                            bodyFont: { family: "'Inter', sans-serif", size: 13 },
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + '% de Dominio Funcional';
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+
+            // Simple visual reveal on scroll (optional polish)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-fade').forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
